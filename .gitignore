@@ -1,0 +1,14 @@
+venv*
+
+.vscode*
+.env
+
+*.pyc
+
+pytooter_clientcred.secret
+
+credentials.yml
+
+*.log
+*.sqlite
+*.db
