@@ -1,0 +1,11 @@
+New report created by @{{ creator }}.
+
+Reported post: {{ reported_post_id }}
+
+{{ reported_post_url }}
+
+Report message: {{ report_message }}
+
+This is an automated message to notify the moderators @Stark9837@techhub.social.
+
+Thank you for your help!

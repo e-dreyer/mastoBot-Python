@@ -1,0 +1,7 @@
+:python: New Python Discuss Alert! :python:
+
+🗨️ Title: {{ title }}
+🏷️️ Category: #{{ topic_category }}
+🔗 URL: {{ url }}
+
+#PythonDiscuss #Python
