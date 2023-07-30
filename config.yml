@@ -1,0 +1,17 @@
+redis:
+    port: 6380
+    host: host.docker.internal
+api:
+    timeout: 10
+favorites:
+    parents: true
+    children: true
+    followers_only: false
+boosts:
+    parents: true
+    children: false
+    followers_only: false
+followers:
+    welcoming_message:
+        enabled: true
+        file: 'new_follow.txt'
