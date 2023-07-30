@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  mastobot-python-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    command: ["python3", "main.py"]
+    networks:
+      - mastobot-python-network
+    depends_on:
+      - mastobot-python-redis
+
+  mastobot-python-redis:
+    image: "redis/redis-stack"
+    volumes:
+      - mastobot-python-redis-data:/data
+    networks:
+      - mastobot-python-network
+    ports:
+      - "${REDIS_PORT}:6379"
+      - "${REDIS_INSIGHT_PORT}:8001"
+
+volumes:
+  mastobot-python-redis-data:
+    driver: local
+
+networks:
+  mastobot-python-network:
