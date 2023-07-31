@@ -28,7 +28,7 @@ def generate_redis_key(input_string: AnyStr) -> AnyStr:
 
 def toPascalCase(s: AnyStr) -> AnyStr:
     parts = s.split(' ')
-    return '#' + parts[0].capitalize() + ''.join(part.title() for part in parts[1:])
+    return parts[0].capitalize() + ''.join(part.title() for part in parts[1:])
 
 def shortenTopicUrl(url: AnyStr) -> AnyStr:
     return re.sub(r'/t/[^/]+/', '/t/', url)
