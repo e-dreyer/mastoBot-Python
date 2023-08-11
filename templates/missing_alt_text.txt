@@ -1,0 +1,4 @@
+
+👋 Hey there, @{{ account }} ! 🤗 Thanks for your post🚀✨
+
+We can however not boost it as it does not contain alt-text for all media attachments
