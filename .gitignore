@@ -12,3 +12,5 @@ credentials.yml
 *.log
 *.sqlite
 *.db
+
+config_local.yml
