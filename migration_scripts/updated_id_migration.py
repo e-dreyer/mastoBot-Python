@@ -135,7 +135,7 @@ async def processJsonFiles():
             
             generated_template = bot.getTemplate('discuss_post.txt', {
                 'title': post['title'],
-                'category': post['topic_category'],
+                'topic_category': post['topic_topic_category'],
                 'url': post['url']
             })
             
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     asyncio.run(generatePostFiles())
     
     # Process the JSON file
-    # asyncio.run(processJsonFiles())
+    asyncio.run(processJsonFiles())
     
     # Purge old database
     asyncio.run((purgeOldDatabase()))
