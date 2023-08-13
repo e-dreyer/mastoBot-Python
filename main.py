@@ -11,7 +11,6 @@ import time
 from mastoBot.configManager import ConfigAccessor
 from mastoBot.mastoBot import MastoBot, handleMastodonExceptions
 
-
 def generate_redis_key(input_string: AnyStr) -> AnyStr:
     # Create a SHA-256 hash object
     sha256_hash = hashlib.sha256()
@@ -244,17 +243,14 @@ if __name__ == "__main__":
     async def runBot():
         while True:
             logging.info("✅ \t Running bot")
-            loop = asyncio.get_event_loop()
-            await asyncio.gather(
-                loop.run_in_executor(None, bot.run),
-            )
+            await bot.run()
             await asyncio.sleep(10)
 
     async def runScraper():
         while True:
             logging.info("⛏️ \t Running scraper")
-            await asyncio.gather(bot.fetchLatestPosts())
-            await asyncio.gather(bot.processPythonDiscussPendingPosts())
+            await bot.fetchLatestPosts()
+            await bot.processPythonDiscussPendingPosts()
             await asyncio.sleep(120) 
 
     async def main():
