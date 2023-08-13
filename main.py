@@ -27,11 +27,9 @@ def generate_redis_key(input_string: AnyStr) -> AnyStr:
 
     return hash_hex
 
-
 def toPascalCase(s: AnyStr) -> AnyStr:
     parts = s.split(" ")
     return parts[0].capitalize() + "".join(part.title() for part in parts[1:])
-
 
 def shortenTopicUrl(url: AnyStr) -> AnyStr:
     return re.sub(r"/t/[^/]+/", "/t/", url)
@@ -196,13 +194,14 @@ class MyBot(MastoBot):
                     "span", class_="category-name"
                 ).text.strip()
 
-                # Generate an ID from the URL
-                generated_id = generate_redis_key(url)
+                # Generate an ID from the shortened URL
+                shortened_link = shortenTopicUrl(url)
+                generated_id = generate_redis_key(shortened_link)
 
                 post = {
                     "id": generated_id,
                     "title": topic_title,
-                    "url": shortenTopicUrl(url),
+                    "url": shortened_link,
                     "topic_category": toPascalCase(topic_category),
                 }
 
