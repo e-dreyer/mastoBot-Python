@@ -1,13 +1,9 @@
-from typing import List, Dict, AnyStr
-import logging
 import re
-import hashlib
 
-import datetime
 import json
 
 import asyncio
-import aiohttp
+import aiohttp #type: ignore
 
 import time
 
@@ -101,15 +97,10 @@ async def processJsonFiles():
     file_path = "posts_to_update.json"
     with open(file_path, "r") as json_file:
         posts_to_update_json = json.load(json_file)
-        
-    file_path = "posts_to_delete.json"
-    with open(file_path, "r") as json_file:
-        posts_to_delete_json = json.load(json_file)
     
     # Get the local and remote posts
     local_store_posts = bot.localStoreObjectGetAll("python-discuss-post")
     remote_posts_to_update = posts_to_update_json['posts']
-    remote_posts_to_delete = posts_to_delete_json['posts']
     
     for post in remote_posts_to_update:
         # Get local post
@@ -135,15 +126,15 @@ async def processJsonFiles():
             
             generated_template = bot.getTemplate('discuss_post.txt', {
                 'title': post['title'],
-                'topic_category': post['topic_topic_category'],
+                'topic_category': post['topic_category'],
                 'url': post['url']
             })
             
             print(generated_template)
             print()
             
-            bot._api.status_update(post['mastodon_id'], generated_template)
-            time.sleep(20)
+            # bot._api.status_update(post['mastodon_id'], generated_template)
+            # time.sleep(20)
         
 async def purgeOldDatabase():
     """
@@ -151,12 +142,10 @@ async def purgeOldDatabase():
     is missing
     """
     local_store_posts = bot.localStoreObjectGetAll("python-discuss-post")
-    
-    local_updated_posts = list(filter(lambda x: x.get('mastodon_id'), local_store_posts))
     local_posts_to_delete = list(filter(lambda x: not x.get('mastodon_id'), local_store_posts))
     
     for post_to_delete in local_posts_to_delete:
-        bot.localStoreDelete("python-discuss-post", post_to_delete.get('id'))
+        bot.localStoreDelete("python-discuss-post", post_to_delete['id'])
     
 async def deleteOldPosts():
     """
@@ -176,7 +165,7 @@ async def deleteOldPosts():
         
 if __name__ == "__main__":
     # Generate json files for posts_to_delete and posts_to_update
-    asyncio.run(generatePostFiles())
+    # asyncio.run(generatePostFiles())
     
     # Process the JSON file
     asyncio.run(processJsonFiles())
